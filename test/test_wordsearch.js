@@ -35,4 +35,14 @@ describe("#wordSearch()", function() {
 
     assert.isTrue(result);
   });
+  it("should returntrue if the word is pesent vertically", function(){
+  const result = wordSearch([
+    ['A'],
+    ['N'],
+    ['D'],
+    ['Y']
+  ], 'ANDY')
+    assert.isTrue(result);
 });
+});
+
