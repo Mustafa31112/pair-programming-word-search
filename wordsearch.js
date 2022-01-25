@@ -1,35 +1,33 @@
 const wordSearch = (letters, word) => {
-    // state is originally false 
-    let state = false;
-  
-    // given function searches for words horizontally
-    const horizontalJoin = letters.map(ls => ls.join(''))
-    // given function checks if word is in letters
-    for (l of horizontalJoin) {
-      if (l.includes(word)) {
-        state = true;
-      }
-    }
-  
-    // implement vertical search
-    const verticalJoin = [];
-    for (let i = 0; i < letters.length; i++) {
-      for (let j = 0; j < letters[0].length; j++) {
-        if (i === 0) {
-          // push an array to store vertical words at 
-          // the beginning of each search
-          verticalJoin.push([])
-        }
-        verticalJoin[j] += horizontalJoin[i][j];
-      }
-    }
-    // implement function to check if word is in letters
-    for (l of verticalJoin) {
-      if (l.includes(word)) {
-        state = true;
-      }
-    }  
-    return state 
+  if (!word || word.length === 0 || !letters || letters.length === 0) {
+    return false;
   }
+
+  const horizontalJoin = letters.map(ls => ls.join(''));
+  // this ^ is a string
+  for (let l of horizontalJoin) {
+    if (l.includes(word)) return true;
+  }
+
+  const verticalJoin = [];
+  for (let i = 0; i < letters[0].length; i++) {
+    let element = '';
+    for (let j = 0; j < letters.length; j++) {
+      element += letters[j][i];
+    }
+    verticalJoin.push(element);
+  }
+  // we want first index of each array, then second
   
-  module.exports = wordSearch;
+  for (let l of verticalJoin) {
+    if (l.includes(word)) return true;
+  }
+
+  return false;
+
+};
+const letters = [];
+const word = '';
+console.log(wordSearch(letters, word));
+
+module.exports = wordSearch;
